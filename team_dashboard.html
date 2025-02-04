@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .logout {
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+        .logout a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .announcements {
+            margin: 2rem 0;
+        }
+        .announcements ul {
+            list-style: none;
+            padding: 0;
+        }
+        .announcements li {
+            background: #f9f9f9;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+        }
+        .announcements li strong {
+            color: #4CAF50;
+        }
+        form {
+            margin-top: 2rem;
+        }
+        form h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        form label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome, Team Member {{ username }}</h1>
+    </header>
+    <main>
+        <div class="logout">
+            <a href="/logout">Logout</a>
+        </div>
+
+        <section class="announcements">
+            <h2>Announcements</h2>
+            <ul>
+                {% for message, timestamp in announcements %}
+                <li>
+                    <strong>{{ timestamp }}</strong>: {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="submit-proposal">
+            <form action="/submit_proposal" method="POST">
+                <h2>Submit Proposal</h2>
+                <label for="round">Round:</label>
+                <input type="number" id="round" name="round" required>
+                <label for="proposal">Proposal:</label>
+                <textarea id="proposal" name="proposal" rows="5" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
